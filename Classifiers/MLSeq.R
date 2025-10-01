@@ -134,14 +134,13 @@ fit.glmnet<-list()
 for (i in 1:length(dds)) {
 
   data <- counts(dds[[i]])
-  class <- DataFrame(condition = as.factor(dds[[i]]$condition))
+  classtr <- DataFrame(condition = as.factor(dds[[i]]$condition))
   # I will use repeated CV to estimate accuracy
   # Minimum count is set to 1 in order to prevent 0 division problem within classification models.
   data.train <- as.matrix(data + 1)
-  classtr <- DataFrame(condition = class)
 
   data.trainS4 = DESeqDataSetFromMatrix(countData = data.train, colData = classtr,
-                                        design = formula(~condition.condition))
+                                        design = formula(~condition))
    # Define control lists.
 
   set.seed(1)
